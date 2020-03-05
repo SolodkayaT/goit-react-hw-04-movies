@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import getQueryParams from "../utils/getQueryParams";
+import Loader from "react-loader-spinner";
+import Notification from "../components/Notification/Notification";
 import moviesApi from "../services/moviesApi";
 import Searchbox from "../components/Searchbox/Searchbox";
 
 export default class MoviesPage extends Component {
   state = {
-    movies: []
+    movies: [],
+    error: null,
+    isLoading: false
   };
 
   componentDidMount() {
@@ -25,9 +29,13 @@ export default class MoviesPage extends Component {
   }
 
   fetchMovies = query => {
+    this.setState({ isLoading: true });
+
     moviesApi
       .fetchMoviesWithQuery(query)
-      .then(movies => this.setState({ movies }));
+      .then(movies => this.setState({ movies }))
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
   };
 
   handleChangeQuery = query => {
@@ -39,12 +47,16 @@ export default class MoviesPage extends Component {
   };
 
   render() {
-    const { movies } = this.state;
+    const { movies, error, isLoading } = this.state;
     const { match } = this.props;
 
     return (
       <>
+        {error && <Notification message={error.message} />}
         <Searchbox onSubmit={this.handleChangeQuery} />
+        {isLoading && (
+          <Loader type="Rings" color="#somecolor" height={80} width={80} />
+        )}
         {movies.length > 0 && (
           <ul>
             {movies.map(movie => (

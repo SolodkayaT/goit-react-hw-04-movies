@@ -1,21 +1,32 @@
 import React, { Component } from "react";
 import moviesApi from "../services/moviesApi";
+import Loader from "react-loader-spinner";
+import Notification from "../components/Notification/Notification";
 
 export default class Reviews extends Component {
   state = {
-    reviews: []
+    reviews: [],
+    error: null,
+    isLoading: false
   };
 
   componentDidMount() {
+    this.setState({ isLoading: true });
+
     moviesApi
       .fetchMoviesReviews(this.props.match.params.movieId)
-      .then(reviews => this.setState({ reviews }));
+      .then(reviews => this.setState({ reviews }))
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
   }
   render() {
-    const { reviews } = this.state;
+    const { reviews, isLoading, error } = this.state;
     return (
       <>
-        <p>Hello</p>
+        {error && <Notification message={error.message} />}
+        {isLoading && (
+          <Loader type="Rings" color="#somecolor" height={80} width={80} />
+        )}
         {reviews.length === 0 && "There is no reviews!"}
         {reviews.length > 0 && (
           <ul>

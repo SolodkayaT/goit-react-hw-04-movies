@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import routes from "../routes";
+import Loader from "react-loader-spinner";
 
 import moviesApi from "../services/moviesApi";
 import AdditionalInfo from "../components/AdditionalInfo/AdditionalInfo";
 import Cast from "../views/Cast";
 import Reviews from "../views/Reviews";
+import Notification from "../components/Notification/Notification";
 
 export default class MovieDetailsPage extends Component {
   static defaultProps = {
@@ -17,12 +19,18 @@ export default class MovieDetailsPage extends Component {
     movieId: PropTypes.number.isRequired
   };
   state = {
-    movie: null
+    movie: null,
+    error: null,
+    isLoading: false
   };
   componentDidMount() {
+    this.setState({ isLoading: true });
+
     moviesApi
       .fetchMovieDetails(this.props.match.params.movieId)
-      .then(movie => this.setState({ movie }));
+      .then(movie => this.setState({ movie }))
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   handleGoBack = () => {
@@ -34,9 +42,13 @@ export default class MovieDetailsPage extends Component {
   };
 
   render() {
-    const { movie } = this.state;
+    const { movie, error, isLoading } = this.state;
     return (
       <>
+        {error && <Notification message={error.message} />}
+        {isLoading && (
+          <Loader type="Rings" color="#somecolor" height={80} width={80} />
+        )}
         <button type="button" onClick={this.handleGoBack}>
           Go back
         </button>
