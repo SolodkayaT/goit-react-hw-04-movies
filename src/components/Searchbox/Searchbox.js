@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./SearchBox.module.css";
 
 export default class Searchbox extends Component {
   state = {
@@ -25,8 +26,11 @@ export default class Searchbox extends Component {
           value={this.state.value}
           onChange={this.handleChange}
           required
+          className={styles.input}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className={styles.searchButton}>
+          Search
+        </button>
       </form>
     );
   }

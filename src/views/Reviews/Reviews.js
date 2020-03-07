@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import moviesApi from "../services/moviesApi";
+import moviesApi from "../../services/moviesApi";
 import Loader from "react-loader-spinner";
-import Notification from "../components/Notification/Notification";
+import Notification from "../../components/Notification/Notification";
 
 export default class Reviews extends Component {
   state = {
-    reviews: [],
+    reviews: {},
     error: null,
     isLoading: false
   };
@@ -25,18 +25,26 @@ export default class Reviews extends Component {
       <>
         {error && <Notification message={error.message} />}
         {isLoading && (
-          <Loader type="Rings" color="#somecolor" height={80} width={80} />
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={3000}
+          />
         )}
         {reviews.length === 0 && "There is no reviews!"}
         {reviews.length > 0 && (
-          <ul>
-            {reviews.map(review => (
-              <li key={review.id}>
-                <h3>Author: {review.author}</h3>
-                <p>Comment: {review.content}</p>
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul>
+              {reviews.map(review => (
+                <li key={review.id}>
+                  <h3>Author: {review.author}</h3>
+                  <p>Comment: {review.content}</p>
+                </li>
+              ))}
+            </ul>
+          </>
         )}
       </>
     );

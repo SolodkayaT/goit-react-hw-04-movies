@@ -1,0 +1,11 @@
+.infoMenu {
+  display: flex;
+  margin-right: 20px;
+}
+.infoMenuItem {
+  text-transform: uppercase;
+}
+.infoLink {
+  text-decoration: none;
+  color: black;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import moviesApi from "../services/moviesApi";
+import moviesApi from "../../services/moviesApi";
 import Loader from "react-loader-spinner";
-import Notification from "../components/Notification/Notification";
+import Notification from "../../components/Notification/Notification";
 
 export default class Cast extends Component {
   state = {
@@ -24,7 +24,13 @@ export default class Cast extends Component {
       <>
         {error && <Notification message={error.message} />}
         {isLoading && (
-          <Loader type="Rings" color="#somecolor" height={80} width={80} />
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={3000} //3 secs
+          />
         )}
         <h2>Cast</h2>
         {actors && <p>{actors.map(actor => actor).join(", ")}</p>}

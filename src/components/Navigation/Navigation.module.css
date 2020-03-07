@@ -1,0 +1,14 @@
+.navigationMenu {
+  display: flex;
+  color: #000000;
+}
+.navigationMenuItem {
+  padding: 0 20px;
+  text-decoration: none;
+  color: #000000;
+}
+.navigationLink {
+  color: #000000;
+  text-decoration: none;
+  text-transform: uppercase;
+}

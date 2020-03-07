@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import getQueryParams from "../utils/getQueryParams";
+import getQueryParams from "../../utils/getQueryParams";
 import Loader from "react-loader-spinner";
-import Notification from "../components/Notification/Notification";
-import moviesApi from "../services/moviesApi";
-import Searchbox from "../components/Searchbox/Searchbox";
+import Notification from "../../components/Notification/Notification";
+import moviesApi from "../../services/moviesApi";
+import Searchbox from "../../components/Searchbox/Searchbox";
+import styles from "../HomePage/HomePage.module.css";
 
 export default class MoviesPage extends Component {
   state = {
@@ -55,13 +56,20 @@ export default class MoviesPage extends Component {
         {error && <Notification message={error.message} />}
         <Searchbox onSubmit={this.handleChangeQuery} />
         {isLoading && (
-          <Loader type="Rings" color="#somecolor" height={80} width={80} />
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={3000} //3 secs
+          />
         )}
         {movies.length > 0 && (
           <ul>
             {movies.map(movie => (
-              <li key={movie.id}>
+              <li key={movie.id} className={styles.popularMovies}>
                 <Link
+                  className={styles.popularMoviesLink}
                   to={{
                     pathname: `${match.url}/${movie.id}`,
                     state: { from: this.props.location }
