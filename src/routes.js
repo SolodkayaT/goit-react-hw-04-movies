@@ -4,5 +4,6 @@ export default {
   moviesDetails: "/movies/:movieId",
   movieCast: "/movies/:movieId/cast",
   movieReview: "/movies/:movieId/reviews",
-  movieImage: "https://image.tmdb.org/t/p/w500/"
+  movieImage: "https://image.tmdb.org/t/p/w500",
+  actorsProfile: "https://image.tmdb.org/t/p/original"
 };

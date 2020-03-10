@@ -5,7 +5,7 @@ import Notification from "../../components/Notification/Notification";
 
 export default class Reviews extends Component {
   state = {
-    reviews: {},
+    reviews: [],
     error: null,
     isLoading: false
   };

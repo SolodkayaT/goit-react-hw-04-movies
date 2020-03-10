@@ -1,0 +1,11 @@
+.image {
+  width: 100px;
+}
+.actorListItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.actorName {
+  margin-left: 5px;
+}

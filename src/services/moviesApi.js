@@ -22,8 +22,7 @@ const fetchTrendingMovie = () => {
 const fetchMoviesActors = movieId => {
   return fetch(`${baseURL}movie/${movieId}/credits?${apiKey}`)
     .then(res => res.json())
-    .then(movie => movie.cast)
-    .then(actorList => actorList.map(actor => actor.name));
+    .then(movie => movie.cast);
 };
 const fetchMoviesReviews = movieId => {
   return fetch(`${baseURL}movie/${movieId}/reviews?${apiKey}`)

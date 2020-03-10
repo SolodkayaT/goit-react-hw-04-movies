@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import moviesApi from "../../services/moviesApi";
 import Loader from "react-loader-spinner";
 import Notification from "../../components/Notification/Notification";
+import routes from "../../routes";
+import styles from "./Cact.module.css";
 
 export default class Cast extends Component {
   state = {
@@ -33,7 +35,21 @@ export default class Cast extends Component {
           />
         )}
         <h2>Cast</h2>
-        {actors && <p>{actors.map(actor => actor).join(", ")}</p>}
+        {actors && (
+          <ul>
+            {actors.map(actor => (
+              <li kye={actor.id} className={styles.actorListItem}>
+                <img
+                  className={styles.image}
+                  src={`${routes.actorsProfile + actor.profile_path}`}
+                  alt={actor.name}
+                />
+
+                <span className={styles.actorName}> {actor.name}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </>
     );
   }

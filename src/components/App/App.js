@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 const Navigation = lazy(() => import("../Navigation/Navigation"));
 const HomePage = lazy(() => import("../../views/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("../../views/MoviePage/MoviesPage"));
+const NotFound = lazy(() => import("../../views/NotFound/NotFound"));
 
 const MovieDetailsPage = lazy(() =>
   import("../../views/MovieDetailsPage/MovieDetailsPage")
@@ -32,9 +33,9 @@ const App = () => {
           <Route path={routes.home} exact component={HomePage} />
           <Route path={routes.movies} exact component={MoviesPage} />
           <Route path={routes.moviesDetails} component={MovieDetailsPage} />
-          <Route component={HomePage} />
           <Route path={routes.movieCast} component={Cast} />
           <Route path={routes.movieReview} component={Reviews} />
+          <Route component={NotFound} />
         </Switch>
       </Suspense>
     </>
